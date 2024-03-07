@@ -1,25 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import {Animal, Dog, Cat} from "./Animal.ts";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const dog = new Dog("dog");
+  const cat = new Cat("cat");
+  type DC = Dog | Cat;
+  const animals: DC[] = [dog, cat];
+
+const handleClick = () => {
+
+  animals.forEach(animal => {
+    animal.bark();
+
+    if (animal instanceof Dog) {
+      animal.killThief();
+      console.log(animal.catchThief)
+    }
+  })
+}
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={handleClick}>
+          bark
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
